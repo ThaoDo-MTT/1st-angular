@@ -1,0 +1,20 @@
+<div style="padding: 20px">
+  <div style="display: flex; flex-direction: row; align-items: center; gap: 10px">
+    <input type="text" placeholder="Enter a todo" [(ngModel)]="bindingText" />
+    <button [disabled]="bindingText === '' || isDisable" (click)="handleClearText()">
+      {{ clearBtn }}
+    </button>
+    <button [disabled]="bindingText === '' || isDisable" (click)="handleAddText()">
+      {{ titleBtn }}
+    </button>
+  </div>
+
+  <h2 style="margin-left: 10px">Text: {{ bindingText | uppercase }}</h2>
+
+  <!-- List Todo -->
+  <div>
+    <ul style="list-style-type: none; padding: 0" *ngFor="let item of listTodo; let i = index">
+      <li [ngClass]="{ 'completed-task': (i + 1) % 2 === 0 }">{{ item }}</li>
+    </ul>
+  </div>
+</div>
