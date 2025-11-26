@@ -2,6 +2,6 @@
   <span>{{ item.id }}</span>
   <input type="checkbox" [(ngModel)]="item.isComplete" />
   <span [ngClass]="{ 'completed-task': item.isComplete }">{{ item.task }}</span>
-  <button (click)="handleDelItem(item.id)">Delete</button>
+  <button (click)="handleDeleteItem(item.id)">Delete</button>
   <a [routerLink]="['/detail-task', item.id]">Detail</a>
 </div>
