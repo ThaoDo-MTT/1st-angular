@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UppercasePipe } from '../pipes/uppercase-pipe';
-import { NgClass, NgFor } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { NgFor } from '@angular/common';
+import { TaskItemType } from '../types/task-item.type';
+import { TaskItem } from '../../app/task-item/task-item';
 
 @Component({
   selector: 'app-body-todo',
   standalone: true,
-  imports: [FormsModule, UppercasePipe, NgFor, NgClass, RouterLink],
+  imports: [FormsModule, UppercasePipe, NgFor, TaskItem],
   templateUrl: './body-todo.html',
   styleUrl: './body-todo.css',
 })
@@ -16,11 +17,7 @@ export class BodyTodo {
   isDisable = false;
   // listTodo: string[] = ['TASK 1', 'TASK 2', 'TASK 3'];
 
-  listTodo: {
-    id: number;
-    task: string;
-    isComplete: boolean;
-  }[] = [
+  listTodo: TaskItemType[] = [
     {
       id: 1,
       task: 'TASK 1',
@@ -56,7 +53,7 @@ export class BodyTodo {
     this.handleClearText();
   }
 
-  handleDelItem(id: number) {
+  handleDelItem = (id: number) => {
     this.listTodo = this.listTodo.filter((item) => item.id !== id);
-  }
+  };
 }

@@ -21,13 +21,7 @@
         <span>Actions</span>
       </div> -->
       <div *ngFor="let item of listTodo; let i = index">
-        <div style="display: flex; flex-direction: row; align-items: center; gap: 10px">
-          <span>{{ item.id }}</span>
-          <input type="checkbox" [(ngModel)]="item.isComplete" />
-          <span [ngClass]="{ 'completed-task': item.isComplete }">{{ item.task }}</span>
-          <button (click)="handleDelItem(item.id)">Delete</button>
-          <a [routerLink]="['/detail-task', item.id]">Detail</a>
-        </div>
+        <app-task-item [item]="item" key="i" [handleDelItem]="handleDelItem"></app-task-item>
       </div>
     </div>
   </div>
