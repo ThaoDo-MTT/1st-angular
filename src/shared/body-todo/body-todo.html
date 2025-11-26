@@ -13,8 +13,22 @@
 
   <!-- List Todo -->
   <div>
-    <ul style="list-style-type: none; padding: 0" *ngFor="let item of listTodo; let i = index">
-      <li [ngClass]="{ 'completed-task': (i + 1) % 2 === 0 }">{{ item }}</li>
-    </ul>
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <!-- <div style="display: flex; flex-direction: row; align-items: center; gap: 10px">
+        <span>ID</span>
+        <span>Status</span>
+        <span>Task</span>
+        <span>Actions</span>
+      </div> -->
+      <div *ngFor="let item of listTodo; let i = index">
+        <div style="display: flex; flex-direction: row; align-items: center; gap: 10px">
+          <span>{{ item.id }}</span>
+          <input type="checkbox" [(ngModel)]="item.isComplete" />
+          <span [ngClass]="{ 'completed-task': item.isComplete }">{{ item.task }}</span>
+          <button (click)="handleDelItem(item.id)">Delete</button>
+          <a [routerLink]="['/detail-task', item.id]">Detail</a>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
