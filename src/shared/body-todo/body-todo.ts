@@ -40,6 +40,10 @@ export class BodyTodo {
   clickMsg = '';
   bindingText = '';
 
+  get totalCompletedTasks() {
+    return this.listTodo.filter((item) => item.isComplete).length;
+  }
+
   handleClearText() {
     this.bindingText = '';
   }
