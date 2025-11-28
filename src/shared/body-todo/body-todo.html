@@ -23,6 +23,7 @@
       <div *ngFor="let item of listTodo; let i = index">
         <app-task-item [item]="item" key="i" (deleteItem)="handleDelItem($event)"></app-task-item>
       </div>
+      <p>Total completed tasks: {{ totalCompletedTasks }}</p>
     </div>
   </div>
 </div>
