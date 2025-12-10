@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:todo-app": "node dist/todo-app/server/server.mjs"
+    "serve:ssr:todo-app": "node dist/todo-app/server/server.mjs",
+    "ai:review": "tsx ai-review.ts"
   },
   "prettier": {
     "printWidth": 100,
@@ -34,7 +35,6 @@
     "@angular/ssr": "^21.0.0",
     "@octokit/rest": "^22.0.1",
     "express": "^5.1.0",
-    "node-fetch": "^3.3.2",
     "openai": "^6.10.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
@@ -47,6 +47,7 @@
     "@types/node": "^20.17.19",
     "jsdom": "^27.1.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.0",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }
