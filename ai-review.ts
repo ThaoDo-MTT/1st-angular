@@ -2,13 +2,16 @@ import { Octokit } from '@octokit/rest';
 import { OpenAI } from 'openai';
 import * as fs from 'fs';
 
+console.log('DEBUG 01');
 const openai = new OpenAI({ apiKey: process.env['OPENAI_API_KEY'] as string });
 const octokit = new Octokit({ auth: process.env['GITHUB_TOKEN'] as string });
+console.log('DEBUG 02');
 
 const { GITHUB_REPOSITORY, GITHUB_EVENT_PATH } = process.env;
 const event = JSON.parse(fs.readFileSync(GITHUB_EVENT_PATH as string, 'utf8'));
 const prNumber = event.number as number;
 const [owner, repo] = (GITHUB_REPOSITORY as string).split('/');
+console.log('DEBUG 03');
 
 async function getPRDiff(): Promise<string> {
   const { data } = await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', {
@@ -50,9 +53,13 @@ async function postReviewComment(reviewComment: string): Promise<void> {
 async function main(): Promise<void> {
   try {
     const diff = await getPRDiff();
+    console.log('DEBUG 04');
     const reviewComment = await reviewCode(diff);
+    console.log('DEBUG 05');
     await postReviewComment(reviewComment);
+    console.log('DEBUG 06');
   } catch (error) {
+    console.log('DEBUG 07');
     console.error('Error during AI code review:', error);
     process.exitCode = 1;
   }
