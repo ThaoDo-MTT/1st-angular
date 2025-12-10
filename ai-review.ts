@@ -8,12 +8,12 @@ import fetch from 'node-fetch'; // Import node-fetch
 
 // Initialize OpenAI API and GitHub API client (Octokit)
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY as string, // OpenAI API Key from GitHub secrets
+  apiKey: process.env['OPENAI_API_KEY'] as string, // Access environment variable using bracket notation
   fetch: fetch as any, // Explicitly pass fetch to OpenAI client
 });
 
 const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN as string, // GitHub Token from GitHub secrets
+  auth: process.env['GITHUB_TOKEN'] as string, // Access environment variable using bracket notation
   fetch, // Explicitly pass fetch to Octokit if needed
 });
 
