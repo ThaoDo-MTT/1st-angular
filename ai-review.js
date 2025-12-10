@@ -1,7 +1,9 @@
-// Import cần thiết
-const { Octokit } = require('@octokit/rest');
-const { OpenAI } = require('openai');
-const fs = require('fs');
+// const { Octokit } = require('@octokit/rest');
+// const { OpenAI } = require('openai');
+// const fs = require('fs');
+import fs from 'fs';
+import { Octokit } from '@octokit/rest';
+import { OpenAI } from 'openai';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
