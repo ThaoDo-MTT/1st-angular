@@ -9,18 +9,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '16'
 
+      # Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # Run AI Review script
       - name: Run AI Review
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: node ai-review.mjs
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # GitHub secret for OpenAI API key
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token to interact with the GitHub API
+        run: npx ts-node ai-review.ts
