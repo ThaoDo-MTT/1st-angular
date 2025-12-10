@@ -1,14 +1,20 @@
 import { Octokit } from '@octokit/rest';
 import { OpenAI } from 'openai';
 import fs from 'fs';
+import fetch from 'node-fetch'; // Import node-fetch
+
+// Polyfill fetch globally for OpenAI SDK
+// globalThis.fetch = fetch;
 
 // Initialize OpenAI API and GitHub API client (Octokit)
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY as string, // OpenAI API Key from GitHub secrets
+  fetch: fetch as any, // Explicitly pass fetch to OpenAI client
 });
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN as string, // GitHub Token from GitHub secrets
+  fetch, // Explicitly pass fetch to Octokit if needed
 });
 
 // Get the GitHub repository and event details from the environment variables
