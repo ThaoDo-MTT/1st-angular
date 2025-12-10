@@ -30,7 +30,7 @@ Return your answer in markdown format with clear sections and bullet points.
 
 Diff:
 ${diff}`;
-  const model = process.env['OPENAI_MODEL'] ?? 'gpt-5';
+  const model = process.env['OPENAI_MODEL'] ?? 'gpt-4o-mini';
   const response = await openai.chat.completions.create({
     model: model,
     messages: [{ role: 'user', content: prompt }],
