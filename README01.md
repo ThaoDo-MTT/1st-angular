@@ -33,3 +33,30 @@ body {
   "src/assets"
 ],
 ```
+
+# III. Other
+
+1. Creation
+
+- constructor(): run when Angular instantiates the component
+
+2. Change Detection
+
+- ngOnInit():
+  - run once after Angular has initialized all the component's input properties
+  - implements OnInit interface
+- ngOnChanges():
+  - implements OnChanges interface
+  - run whenever any input of the component changes
+  - use it because it is good for performance
+- ngDoCheck():
+  - implements DoCheck interface
+  - run whenever when state, content, DOM, ... changes
+  - Must Destroy when don't use it anymore
+
+3. Destruction
+
+- ngOnDestroy():
+  - implements OnDestroy interface
+  - run just before Angular destroys the component
+  - use it to clean up any resources, such as subscriptions, timers, ...
