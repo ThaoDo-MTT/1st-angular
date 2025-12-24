@@ -13,19 +13,10 @@ import { FormsModule } from '@angular/forms';
 export class TaskItem {
   @Input() item!: TaskItemType;
 
-  // @Input() handleDelItem!: (id: number) => void;
-
   @Output() deleteItem = new EventEmitter<number>();
 
   handleDeleteItem = (id: number) => {
     console.log('id', id);
     this.deleteItem.emit(id);
   };
-
-  // ngOnInit(): void {
-  //   // Kiểm tra nếu handleDelItem là một function
-  //   if (typeof this.handleDelItem !== 'function') {
-  //     console.error('handleDelItem is not a function!');
-  //   }
-  // }
 }

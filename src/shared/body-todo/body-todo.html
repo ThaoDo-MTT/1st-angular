@@ -14,12 +14,6 @@
   <!-- List Todo -->
   <div>
     <div style="display: flex; flex-direction: column; gap: 10px">
-      <!-- <div style="display: flex; flex-direction: row; align-items: center; gap: 10px">
-        <span>ID</span>
-        <span>Status</span>
-        <span>Task</span>
-        <span>Actions</span>
-      </div> -->
       <div *ngFor="let item of listTodo; let i = index">
         <app-task-item [item]="item" key="i" (deleteItem)="handleDelItem($event)"></app-task-item>
       </div>

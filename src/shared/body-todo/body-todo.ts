@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UppercasePipe } from '../pipes/uppercase-pipe';
-import { NgFor } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { TaskItemType } from '../types/task-item.type';
 import { TaskItem } from '../../app/task-item/task-item';
 
@@ -12,10 +12,9 @@ import { TaskItem } from '../../app/task-item/task-item';
   templateUrl: './body-todo.html',
   styleUrl: './body-todo.css',
 })
-export class BodyTodo {
+export class BodyTodo implements OnInit, DoCheck, OnChanges, OnDestroy {
   // Property
   isDisable = false;
-  // listTodo: string[] = ['TASK 1', 'TASK 2', 'TASK 3'];
 
   listTodo: TaskItemType[] = [
     {
@@ -34,11 +33,15 @@ export class BodyTodo {
       isComplete: false,
     },
   ];
+
   //Attribute
   clearBtn = 'Clear';
   titleBtn = 'Add Todo';
   clickMsg = '';
   bindingText = '';
+  constructor() {
+    console.log('RUN constructor');
+  }
 
   get totalCompletedTasks() {
     return this.listTodo.filter((item) => item.isComplete).length;
@@ -60,4 +63,37 @@ export class BodyTodo {
   handleDelItem = (id: number) => {
     this.listTodo = this.listTodo.filter((item) => item.id !== id);
   };
+
+  ngOnInit(): void {
+    console.log('RUN ngOnInit');
+
+    // fetch('https://dummyjson.com/todos')
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     const { todos } = data;
+    //     console.log('todos', todos.length);
+
+    //     this.listTodo = todos.slice(0, 10).map((item: any) => ({
+    //       id: item.id,
+    //       task: item.todo,
+    //       isComplete: item.completed,
+    //     }));
+
+    //     console.log('populated listTodo', this.listTodo);
+    //   })
+    //   .catch((err) => console.log(err));
+  }
+
+  ngDoCheck(): void {
+    console.log('RUN ngDoCheck');
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('RUN ngOnChanges pre', changes['listTodo'].previousValue);
+    console.log('RUN ngOnChanges cur', changes['listTodo'].currentValue);
+  }
+
+  ngOnDestroy(): void {
+    console.log('RUN ngOnDestroy');
+  }
 }

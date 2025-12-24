@@ -1,1 +1,5 @@
-<app-body-todo></app-body-todo>
+<button (click)="handleToggleServer()">
+  {{ isServerRunning ? 'Destroy Component' : 'Create Component' }}
+</button>
+
+<app-body-todo *ngIf="isServerRunning"></app-body-todo>
