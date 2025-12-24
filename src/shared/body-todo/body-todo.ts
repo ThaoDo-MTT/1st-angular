@@ -4,6 +4,8 @@ import { UppercasePipe } from '../pipes/uppercase-pipe';
 import { NgClass, NgFor } from '@angular/common';
 import { TaskItemType } from '../types/task-item.type';
 import { TaskItem } from '../../app/task-item/task-item';
+import { HttpClient } from '@angular/common/http';
+import { TodoApiService } from '../../services/todo-api';
 
 @Component({
   selector: 'app-body-todo',
@@ -17,21 +19,21 @@ export class BodyTodo implements OnInit, DoCheck, OnChanges, OnDestroy {
   isDisable = false;
 
   listTodo: TaskItemType[] = [
-    {
-      id: 1,
-      task: 'TASK 1',
-      isComplete: true,
-    },
-    {
-      id: 2,
-      task: 'TASK 2',
-      isComplete: false,
-    },
-    {
-      id: 3,
-      task: 'TASK 3',
-      isComplete: false,
-    },
+    // {
+    //   id: 1,
+    //   task: 'TASK 1',
+    //   isComplete: true,
+    // },
+    // {
+    //   id: 2,
+    //   task: 'TASK 2',
+    //   isComplete: false,
+    // },
+    // {
+    //   id: 3,
+    //   task: 'TASK 3',
+    //   isComplete: false,
+    // },
   ];
 
   //Attribute
@@ -39,7 +41,7 @@ export class BodyTodo implements OnInit, DoCheck, OnChanges, OnDestroy {
   titleBtn = 'Add Todo';
   clickMsg = '';
   bindingText = '';
-  constructor() {
+  constructor(private todoApiService: TodoApiService) {
     console.log('RUN constructor');
   }
 
@@ -66,22 +68,13 @@ export class BodyTodo implements OnInit, DoCheck, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     console.log('RUN ngOnInit');
-
-    // fetch('https://dummyjson.com/todos')
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     const { todos } = data;
-    //     console.log('todos', todos.length);
-
-    //     this.listTodo = todos.slice(0, 10).map((item: any) => ({
-    //       id: item.id,
-    //       task: item.todo,
-    //       isComplete: item.completed,
-    //     }));
-
-    //     console.log('populated listTodo', this.listTodo);
-    //   })
-    //   .catch((err) => console.log(err));
+    this.todoApiService.getTodos().subscribe(({ todos }) => {
+      this.listTodo = todos.slice(0, 10).map((item: any) => ({
+        id: item.id,
+        task: item.todo,
+        isComplete: item.completed,
+      }));
+    });
   }
 
   ngDoCheck(): void {
